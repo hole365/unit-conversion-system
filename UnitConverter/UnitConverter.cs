@@ -3,14 +3,14 @@ using System.Xml;
 
 namespace unit_conversion.Models
 {
-    public class ValueWithUnit
-    {
-        public double Value { get; set; }
-        public string? Unit { get; set; }
-        public string? Annotation { get; set; }
-    }
+	public class ValueWithUnit : unit_converter.UserInput
+	{
+		public double Value { get; set; }
+		public string? Unit { get; set; }
+		public string? Annotation { get; set; }
+	}
 
-    public class UnitConverter
+	public class UnitConverter
     {
 		public Dictionary<string, UnitOfMeasureDictionaryUnitOfMeasure> Units { get; set; } = new Dictionary<string, UnitOfMeasureDictionaryUnitOfMeasure>();
         public Dictionary<string, List<string>> Quantities { get; set; } = new Dictionary<string, List<string>>();
@@ -19,7 +19,7 @@ namespace unit_conversion.Models
         public Dictionary<string, List<string>> Aliases { get; set; } = new Dictionary<string, List<string>>();
 
 
-		public UnitConverter(string fileToParse = @"a.xml")
+		public UnitConverter(string fileToParse = @"POSC.xml")
 		{
 			ParseXML(fileToParse);
 		}
@@ -98,7 +98,7 @@ namespace unit_conversion.Models
 		{
 			try
 			{
-				return Quantities.GetValueOrDefault(unit);
+				return Aliases.GetValueOrDefault(unit);
 			}
 			catch (Exception)
 			{
@@ -122,7 +122,7 @@ namespace unit_conversion.Models
             }
         }
 
-		public List<string> ListUnitsForCustomQuantity(string quantity)
+		public List<string>? ListUnitsForCustomQuantity(string quantity)
 		{
 			try
 			{
@@ -217,7 +217,7 @@ namespace unit_conversion.Models
 		}
 
 
-		private void ParseXML(string fileToParse = @"a.xml")
+		private void ParseXML(string fileToParse = @"..\POSC.xml")
 		{
 			using (var sreader = new StringReader(File.ReadAllText(fileToParse)))
 			using (var reader = XmlReader.Create(sreader))

@@ -15,7 +15,7 @@ namespace unit_conversion.Models.Tests
 		private readonly UnitConverter _unitConverter;
 		public UnitConversionUnitTest()
 		{
-			_unitConverter = new UnitConverter(@"..\..\..\..\..\unit-converter\a.xml");
+			_unitConverter = new UnitConverter(@"..\..\..\..\POSC.xml");
 		}
 		public UnitConverter Converter { get { return _unitConverter; } private set {; } }
 
